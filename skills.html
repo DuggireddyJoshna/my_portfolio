@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Skills - Portfolio</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff; /* changed to white */
+            min-height: 100vh;
+            padding: 80px 20px 40px; /* top padding accounts for fixed navbar */
+        }
+
+        /* ----- FIXED NAVIGATION (full width, white background) ----- */
+        .nav-wrapper {
+            width: 100%;
+            background: #ffffff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #eef2f6;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 20px;
+        }
+
+        .nav-left {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #2563eb;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav-item {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1e3b5c;
+            text-decoration: none;
+            transition: 0.15s;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-item:hover {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+
+        /* ----- MAIN CONTAINER (solid white with subtle shadow) ----- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff; /* solid white */
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08); /* softer shadow */
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e293b;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #475569;
+            margin-bottom: 50px;
+            margin-top: 20px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .skill-card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #f1f5f9;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(135deg, #2563eb10, #7c3aed10);
+            transition: height 0.3s ease;
+            z-index: 0;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+            border-color: #dbeafe;
+        }
+
+        .skill-card:hover::before {
+            height: 100%;
+        }
+
+        .skill-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            color: #2563eb;
+        }
+
+        .skill-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #1e293b;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Modal Styles (unchanged, but adapted to white background) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: #1e293b;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .modal-header i {
+            font-size: 3em;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .modal-header h2 {
+            color: #1e293b;
+            font-size: 1.8em;
+        }
+
+        .modal-body {
+            color: #475569;
+            line-height: 1.8;
+        }
+
+        .modal-body p {
+            margin-bottom: 15px;
+        }
+
+        .skill-details {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .skill-details ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skill-details li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-details li i {
+            color: #2563eb;
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 70px 15px 30px;
+            }
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 20px;
+            }
+            
+            .skill-card {
+                padding: 20px 15px;
+            }
+            
+            .skill-icon {
+                font-size: 2.5em;
+            }
+            
+            .modal-content {
+                margin: 20% auto;
+                width: 95%;
+                padding: 20px;
+            }
+
+            .nav-right {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed navigation bar (full width, white) -->
+    <div class="nav-wrapper">
+        <div class="nav-container">
+            <div class="nav-left">Joshna</div>
+            <div class="nav-right">
+                <a href="home.html" class="nav-item">Home</a>
+                <a href="projects.html" class="nav-item">Projects</a>
+                <a href="skills.html" class="nav-item">Skills</a>
+             
+                <a href="#" class="nav-item">Resume</a>
+                <a href="about.html" class="nav-item">About me</a>
+                <a href="contact.html" class="nav-item">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content container (white background) -->
+    <div class="container">
+        <h1>My Technical Skills</h1>
+        <p class="subtitle">Click on any skill to learn more about my expertise</p>
+        
+        <div class="skills-grid" id="skillsGrid">
+            <!-- Skills will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal Popup -->
+    <div id="skillModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <i id="modalIcon" class="fas fa-code"></i>
+                <h2 id="modalTitle">Skill Name</h2>
+            </div>
+            <div class="modal-body">
+                <p id="modalDescription">Skill description will appear here.</p>
+                <div class="skill-details" id="modalDetails">
+                    <!-- Additional details will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Skills data with icons, descriptions, and details (unchanged)
+        const skillsData = [
+            {
+                name: "HTML5",
+                icon: "fab fa-html5",
+                description: "HTML5 is the latest version of Hypertext Markup Language, used for structuring and presenting content on the World Wide Web.",
+                details: [
+                    "Semantic HTML elements",
+                    "Forms and validation",
+                    "Canvas and SVG graphics",
+                    "Audio and video integration",
+                    "Local storage and offline capabilities"
+                ]
+            },
+            {
+                name: "CSS3",
+                icon: "fab fa-css3-alt",
+                description: "CSS3 is used for styling web pages, including layout, colors, fonts, and responsive design for different screen sizes.",
+                details: [
+                    "Flexbox and Grid layouts",
+                    "Animations and transitions",
+                    "Responsive design",
+                    "CSS variables",
+                    "Media queries"
+                ]
+            },
+            {
+                name: "JavaScript",
+                icon: "fab fa-js",
+                description: "JavaScript is a programming language that enables interactive web pages and is an essential part of web applications.",
+                details: [
+                    "ES6+ features",
+                    "DOM manipulation",
+                    "Asynchronous programming",
+                    "API integration",
+                    "Modern frameworks"
+                ]
+            },
+            {
+                name: "React",
+                icon: "fab fa-react",
+                description: "React is a JavaScript library for building user interfaces, particularly single-page applications with reusable components.",
+                details: [
+                    "Component-based architecture",
+                    "Hooks and lifecycle methods",
+                    "State management",
+                    "React Router",
+                    "Performance optimization"
+                ]
+            },
+            {
+                name: "Node.js",
+                icon: "fab fa-node",
+                description: "Node.js is a runtime environment that allows JavaScript to run on the server-side, enabling full-stack JavaScript development.",
+                details: [
+                    "Express.js framework",
+                    "RESTful APIs",
+                    "Database integration",
+                    "Authentication",
+                    "Real-time applications"
+                ]
+            },
+            {
+                name: "Python",
+                icon: "fab fa-python",
+                description: "Python is a versatile programming language known for its simplicity and readability, widely used in web development and data science.",
+                details: [
+                    "Web development with Django/Flask",
+                    "Data analysis",
+                    "Machine learning",
+                    "Automation scripts",
+                    "API development"
+                ]
+            },
+            {
+                name: "Database",
+                icon: "fas fa-database",
+                description: "Experience with various database systems for storing and managing data efficiently.",
+                details: [
+                    "MySQL and PostgreSQL",
+                    "MongoDB",
+                    "Query optimization",
+                    "Database design",
+                    "Data modeling"
+                ]
+            },
+            {
+                name: "Git",
+                icon: "fab fa-git-alt",
+                description: "Git is a distributed version control system for tracking changes in source code during software development.",
+                details: [
+                    "Version control",
+                    "Branching and merging",
+                    "Collaboration workflows",
+                    "GitHub/GitLab",
+                    "Code review processes"
+                ]
+            },
+            {
+                name: "Responsive Design",
+                icon: "fas fa-mobile-alt",
+                description: "Creating websites that provide optimal viewing experiences across different devices and screen sizes.",
+                details: [
+                    "Mobile-first approach",
+                    "Flexible layouts",
+                    "Responsive images",
+                    "Cross-browser compatibility",
+                    "Touch-friendly interfaces"
+                ]
+            },
+            {
+                name: "UI/UX Design",
+                icon: "fas fa-paint-brush",
+                description: "Understanding of user interface and user experience principles for creating intuitive and engaging designs.",
+                details: [
+                    "User research",
+                    "Wireframing and prototyping",
+                    "Color theory",
+                    "Typography",
+                    "Accessibility standards"
+                ]
+            }
+        ];
+
+        // Get DOM elements
+        const skillsGrid = document.getElementById('skillsGrid');
+        const modal = document.getElementById('skillModal');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        const modalIcon = document.getElementById('modalIcon');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalDetails = document.getElementById('modalDetails');
+
+        // Populate skills grid
+        skillsData.forEach(skill => {
+            const skillCard = document.createElement('div');
+            skillCard.className = 'skill-card';
+            skillCard.innerHTML = `
+                <div class="skill-icon">
+                    <i class="${skill.icon}"></i>
+                </div>
+                <div class="skill-name">${skill.name}</div>
+            `;
+            
+            skillCard.addEventListener('click', () => openModal(skill));
+            skillsGrid.appendChild(skillCard);
+        });
+
+        // Open modal with skill details
+        function openModal(skill) {
+            modalIcon.className = skill.icon;
+            modalTitle.textContent = skill.name;
+            modalDescription.textContent = skill.description;
+            
+            // Create details list
+            let detailsHTML = '<ul>';
+            skill.details.forEach(detail => {
+                detailsHTML += `<li><i class="fas fa-check-circle"></i> ${detail}</li>`;
+            });
+            detailsHTML += '</ul>';
+            modalDetails.innerHTML = detailsHTML;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        // Close modal
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Close button click
+        closeBtn.addEventListener('click', closeModal);
+
+        // Click outside modal to close
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Escape key to close modal
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modal.style.display === 'block') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

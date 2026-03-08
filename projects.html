@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects - Portfolio Showcase</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.05);
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 3em;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            max-width: 600px;
+            margin: 20px auto 0;
+        }
+
+        /* Navigation */
+        .nav-wrapper {
+            width: 100%;
+            background: #ffffff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #eef2f6;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 20px;
+        }
+
+        .nav-left {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #2563eb;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav-item {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1e3b5c;
+            text-decoration: none;
+            transition: 0.15s;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-item:hover {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            opacity: 1;
+            transform: scale(1);
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        /* Project Image/Icon Section */
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image i {
+            font-size: 5em;
+            color: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-image i {
+            transform: scale(1.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Removed .project-overlay and .project-tech-badge styles as they are no longer used */
+
+        /* Project Content */
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .project-title h3 {
+            font-size: 1.5em;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .project-status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .status-completed {
+            background: #e3fcef;
+            color: #00b894;
+        }
+
+        .status-ongoing {
+            background: #fff3cd;
+            color: #ffa500;
+        }
+
+        .project-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        .project-tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            background: #f0f0f0;
+            color: #555;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Project Links */
+        .project-links {
+            display: flex;
+            gap: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .project-link {
+            flex: 1;
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 10px 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .project-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .project-link.secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .project-link.secondary:hover {
+            background: #f8f9fa;
+        }
+
+        .project-link i {
+            font-size: 1.1em;
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .stat-icon {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #333;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1em;
+        }
+
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+            font-size: 1.2em;
+            grid-column: 1 / -1;
+        }
+
+        .no-results i {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-links {
+                flex-direction: column;
+            }
+            
+            .project-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-wrapper">
+        <div class="nav-container">
+            <div class="nav-left">Joshna</div>
+            <div class="nav-right">
+                <a href="home.html" class="nav-item">Home</a>
+                <a href="projects.html" class="nav-item">Projects</a>
+                <a href="skills.html" class="nav-item">Skills</a>
+              
+                <a href="#" class="nav-item">Resume</a>
+                <a href="about.html" class="nav-item">About me</a>
+                <a href="contact.html" class="nav-item">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>My Projects</h1>
+            <p class="subtitle">Explore my latest work and personal projects. Each project represents my passion for creating innovative solutions.</p>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid" id="projectsGrid"></div>
+
+        <!-- Statistics Section -->
+        <div class="stats-section" id="statsSection"></div>
+    </div>
+
+    <script>
+        // Projects data (unchanged)
+        const projectsData = [
+            {
+                id: 1,
+                name: "E-Commerce Platform",
+                description: "A full-featured e-commerce platform with product management, shopping cart, and secure payment integration. Includes admin dashboard and real-time inventory tracking.",
+                longDescription: "Built with modern web technologies, this platform offers a seamless shopping experience with features like product search, filters, user reviews, and order tracking.",
+                url: "https://ecommerce-demo.com",
+                githubUrl: "https://github.com/username/ecommerce",
+                category: "web",
+                status: "completed",
+                technologies: ["React", "Node.js", "MongoDB", "Express", "Redux", "Stripe API"],
+                icon: "fa-solid fa-cart-shopping",
+                year: "2024",
+                client: "Personal Project"
+            },
+            {
+                id: 2,
+                name: "Weather Dashboard",
+                description: "Interactive weather application providing real-time weather data, 5-day forecasts, and interactive maps. Includes location search and favorite locations.",
+                longDescription: "Users can check weather conditions worldwide with detailed information about temperature, humidity, wind speed, and precipitation.",
+                url: "https://weather-app-demo.netlify.app",
+                githubUrl: "https://github.com/username/weather-app",
+                category: "web",
+                status: "completed",
+                technologies: ["JavaScript", "Weather API", "Chart.js", "CSS3", "Local Storage"],
+                icon: "fa-solid fa-cloud-sun",
+                year: "2024",
+                client: "Personal Project"
+            },
+            {
+                id: 3,
+                name: "Task Management App",
+                description: "A productivity application for managing tasks, setting priorities, and tracking progress. Features include drag-drop interface and team collaboration.",
+                longDescription: "This app helps teams and individuals stay organized with features like task assignments, due dates, notifications, and progress tracking.",
+                url: "https://taskmanager.vercel.app",
+                githubUrl: "https://github.com/username/task-manager",
+                category: "web",
+                status: "ongoing",
+                technologies: ["Vue.js", "Firebase", "Tailwind CSS", "Vuex"],
+                icon: "fa-solid fa-check-double",
+                year: "2024",
+                client: "Startup Project"
+            },
+            {
+                id: 4,
+                name: "Fitness Tracker Mobile App",
+                description: "Cross-platform mobile app for tracking workouts, nutrition, and fitness goals. Includes workout plans and progress visualization.",
+                longDescription: "Users can log exercises, track calories, view workout history, and get personalized workout recommendations based on their goals.",
+                url: "https://play.google.com/store/apps/details?id=com.fitnessapp",
+                githubUrl: "https://github.com/username/fitness-app",
+                category: "mobile",
+                status: "completed",
+                technologies: ["React Native", "Firebase", "Redux", "Health Kit API"],
+                icon: "fa-solid fa-heart-pulse",
+                year: "2023",
+                client: "Fitness Startup"
+            },
+            {
+                id: 5,
+                name: "Portfolio Website Design",
+                description: "A modern, responsive portfolio website design with smooth animations and interactive elements. Showcases creative work effectively.",
+                longDescription: "This design concept focuses on visual storytelling with a clean layout, typography hierarchy, and engaging user interactions.",
+                url: "https://portfolio-design.figma.com",
+                githubUrl: "https://github.com/username/portfolio-design",
+                category: "design",
+                status: "completed",
+                technologies: ["Figma", "Adobe XD", "Illustrator", "Photoshop"],
+                icon: "fa-solid fa-paintbrush",
+                year: "2024",
+                client: "Freelance Project"
+            },
+          
+            {
+                id: 7,
+                name: "Food Delivery App UI",
+                description: "Complete UI/UX design for a food delivery application with user flows, wireframes, and high-fidelity prototypes.",
+                longDescription: "Designed for both iOS and Android platforms with focus on user experience, easy navigation, and appealing food presentation.",
+                url: "https://food-app-design.behance.net",
+                githubUrl: "https://github.com/username/food-app-ui",
+                category: "design",
+                status: "completed",
+                technologies: ["Figma", "Prototyping", "User Testing", "Wireframing"],
+                icon: "fa-solid fa-utensils",
+                year: "2023",
+                client: "Design Contest"
+            },
+            {
+                id: 8,
+                name: "Cryptocurrency Dashboard",
+                description: "Real-time cryptocurrency tracking dashboard with price alerts, portfolio management, and market analysis tools.",
+                longDescription: "Track your favorite cryptocurrencies, view historical data, set price alerts, and manage your portfolio all in one place.",
+                url: "https://crypto-dashboard.com",
+                githubUrl: "https://github.com/username/crypto-dashboard",
+                category: "web",
+                status: "completed",
+                technologies: ["React", "WebSockets", "Chart.js", "CoinGecko API"],
+                icon: "fa-solid fa-bitcoin",
+                year: "2023",
+                client: "Personal Project"
+            }
+        ];
+
+        // Get DOM elements
+        const projectsGrid = document.getElementById('projectsGrid');
+        const statsSection = document.getElementById('statsSection');
+
+        // Initialize page: display all projects and statistics
+        function initializePage() {
+            displayProjects(projectsData);
+            updateStatistics();
+        }
+
+        // Display all projects
+        function displayProjects(projects) {
+            projectsGrid.innerHTML = '';
+            
+            if (projects.length === 0) {
+                projectsGrid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fa-solid fa-folder-open"></i>
+                        <p>No projects found</p>
+                    </div>
+                `;
+                return;
+            }
+
+            projects.forEach((project, index) => {
+                const projectCard = createProjectCard(project, index);
+                projectsGrid.appendChild(projectCard);
+            });
+        }
+
+        // Create individual project card (year overlay removed)
+        function createProjectCard(project, index) {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.style.animationDelay = `${index * 0.1}s`;
+            
+            const statusClass = project.status === 'completed' ? 'status-completed' : 'status-ongoing';
+            const statusText = project.status === 'completed' ? 'Completed' : 'In Progress';
+            
+            const techTags = project.technologies.slice(0, 4).map(tech => 
+                `<span class="tech-tag">${tech}</span>`
+            ).join('');
+            
+            const techIndicator = project.technologies.length > 4 ? 
+                `<span class="tech-tag">+${project.technologies.length - 4} more</span>` : '';
+
+            // Note: The overlay with year badge has been completely removed.
+            card.innerHTML = `
+                <div class="project-image">
+                    <i class="fa-solid ${project.icon}"></i>
+                </div>
+                <div class="project-content">
+                    <div class="project-title">
+                        <h3>${project.name}</h3>
+                        <span class="project-status ${statusClass}">${statusText}</span>
+                    </div>
+                    <p class="project-description">${project.description}</p>
+                    <div class="project-tech-stack">
+                        ${techTags}
+                        ${techIndicator}
+                    </div>
+                    <div class="project-links">
+                        <a href="${project.url}" target="_blank" class="project-link" title="Visit Live Site">
+                            <i class="fa-solid fa-globe"></i> Live Demo
+                        </a>
+                        <a href="${project.githubUrl}" target="_blank" class="project-link secondary" title="View Code">
+                            <i class="fa-brands fa-github"></i> Code
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Update statistics
+        function updateStatistics() {
+            const totalProjects = projectsData.length;
+            const completedProjects = projectsData.filter(p => p.status === 'completed').length;
+            const webProjects = projectsData.filter(p => p.category === 'web').length;
+            const currentYearProjects = projectsData.filter(p => p.year === '2024').length;
+            
+            statsSection.innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                    <div class="stat-number">${totalProjects}</div>
+                    <div class="stat-label">Total Projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-check-circle"></i>
+                    </div>
+                    <div class="stat-number">${completedProjects}</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <div class="stat-number">${webProjects}</div>
+                    <div class="stat-label">Web Projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-calendar"></i>
+                    </div>
+                    <div class="stat-number">${currentYearProjects}</div>
+                    <div class="stat-label">Projects in 2024</div>
+                </div>
+            `;
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializePage();
+        });
+    </script>
+</body>
+</html>

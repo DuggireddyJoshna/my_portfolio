@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us · Joshna</title>
+    <!-- Google Font & Font Awesome for social icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Navigation */
+        .nav-wrapper {
+            width: 100%;
+            background: #ffffff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #eef2f6;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 20px;
+        }
+
+        .nav-left {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #2563eb;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav-item {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1e3b5c;
+            text-decoration: none;
+            transition: 0.15s;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-item:hover {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* top padding prevents fixed nav from covering content */
+            padding: 80px 20px 20px;  /* 80px ≈ nav height + breathing room */
+        }
+
+        .contact-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-container:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: #333;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 15px;
+        }
+
+        /* --- social links row (added above full name) --- */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;   /* space before first field */
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.2rem;
+            height: 3.2rem;
+            border-radius: 50%;
+            background: #f5f5f5;
+            color: #555;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.03);
+        }
+
+        .social-link i {
+            font-size: 1.8rem;
+        }
+
+        .social-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.35);
+        }
+
+        /* brand colors on hover (subtle variation) */
+        .social-link:hover .fa-linkedin { color: white; }
+        .social-link:hover .fa-github { color: white; }
+        .social-link:hover .fa-whatsapp { color: white; }
+        .social-link:hover .fa-instagram { color: white; }
+
+        /* form fields */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: #fafafa;
+            margin-bottom: 20px;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background-color: #fff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            transition: opacity 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Hide line breaks (kept from original) */
+        br {
+            display: none;
+        }
+
+        /* field-group spacing */
+        .field-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- fixed navigation (unchanged) -->
+    <div class="nav-wrapper">
+        <div class="nav-container">
+            <div class="nav-left">Joshna</div>
+            <div class="nav-right">
+                <a href="home.html" class="nav-item">Home</a>
+                <a href="projects.html" class="nav-item">Projects</a>
+                <a href="skills.html" class="nav-item">Skills</a>
+               
+                <a href="#" class="nav-item">Resume</a>
+                <a href="about.html" class="nav-item">About me</a>
+                <a href="contact.html" class="nav-item">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- contact form container -->
+    <div class="contact-container">
+        <h2>Let's connect and collaborate</h2>
+        <p class="subtitle">I'd love to hear from you! Send a message or find me on social.</p>
+        
+        <form action="https://formspree.io/f/mreybyjr" method="post">
+            
+            <!-- LinkedIn, GitHub, WhatsApp, Instagram icons (added above full name) -->
+            <div class="social-links">
+                <a href="#" class="social-link" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link" aria-label="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="social-link" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+
+            <!-- Full Name field (now below social icons) -->
+            <div class="field-group">
+                <label for="name">Full Name</label>
+                <input type="text" name="name" id="name" placeholder="John Doe" required>
+            </div>
+
+            <div class="field-group">
+                <label for="email">Email Address</label>
+                <input type="email" name="email" id="email" placeholder="john@example.com" required>
+            </div>
+
+            <div class="field-group">
+                <label for="message">Your Message</label>
+                <textarea name="message" id="message" placeholder="How can we help you?" required></textarea>
+            </div>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+</body>
+</html>
